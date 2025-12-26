@@ -15,14 +15,13 @@
             --gold: #d4af37;
             --dark-gold: #b8941f;
             --black: #0a0a0a;
-            --dark-gray: #1a1a1a;
-            --light-gray: #2a2a2a;
+            --dark-bg: #121212;
+            --silver: #c0c0c0;
+            --dark-silver: #8c8c8c;
+            --light-silver: #d3d3d3;
             --white: #ffffff;
             --cream: #f5f5f0;
-            --purple: #8A2BE2;
-            --light-purple: #DA70D6;
-            --jazz-blue: #4a90a4;
-            --jazz-teal: #5fb3aa;
+            --soft-cream: #e8e8e0;
         }
 
         body {
@@ -93,8 +92,8 @@
             border-radius: 50%;
             border: 2px solid var(--gold);
             transition: all 0.3s ease;
-            box-shadow: 0 0 10px rgba(212,175,55,0.3);
-            background: linear-gradient(135deg, var(--purple), var(--light-purple));
+            box-shadow: 0 0 10px rgba(212,175,55,0.2);
+            background: radial-gradient(circle at 30% 30%, var(--gold), var(--dark-gold));
             position: relative;
             overflow: hidden;
         }
@@ -102,13 +101,13 @@
         .logo-img::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(circle, rgba(255,255,255,0.4) 1.5px, transparent 1.5px);
-            background-size: 6px 6px;
-            background-position: 0 0, 3px 3px;
+            top: 20%;
+            left: 20%;
+            width: 30%;
+            height: 30%;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            filter: blur(4px);
         }
 
         .logo:hover .logo-img {
@@ -216,12 +215,10 @@
             background: rgba(212,175,55,0.1);
         }
 
-        /* Hero Section with Artwork Background */
+        /* Hero Section - Elegant & Minimalist */
         .hero {
             height: 100vh;
-            background: 
-                linear-gradient(135deg, rgba(10,10,10,0.85), rgba(10,10,10,0.65)),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><defs><pattern id="clocks" patternUnits="userSpaceOnUse" width="120" height="120"><circle cx="60" cy="60" r="55" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2"/><line x1="60" y1="10" x2="60" y2="25" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><line x1="60" y1="95" x2="60" y2="110" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><line x1="10" y1="60" x2="25" y2="60" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><line x1="95" y1="60" x2="110" y2="60" stroke="rgba(255,255,255,0.4)" stroke-width="2"/><line x1="60" y1="60" x2="75" y2="35" stroke="rgba(212,175,55,0.6)" stroke-width="3" stroke-linecap="round"/><line x1="60" y1="60" x2="85" y2="60" stroke="rgba(212,175,55,0.8)" stroke-width="2" stroke-linecap="round"/></pattern></defs><rect width="100%25" height="100%25" fill="url(%23clocks)"/><rect width="100%25" height="100%25" fill="linear-gradient(45deg, rgba(74,144,164,0.3), rgba(95,179,170,0.2), rgba(138,43,226,0.15))"/></svg>') center/cover;
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, var(--black) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -236,61 +233,36 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(74,144,164,0.4), transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(95,179,170,0.3), transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(138,43,226,0.2), transparent 60%);
-            animation: colorShift 15s ease-in-out infinite;
-        }
-
-        @keyframes colorShift {
-            0%, 100% {
-                opacity: 0.6;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.8;
-                transform: scale(1.1);
-            }
+            background:
+                radial-gradient(circle at 15% 20%, rgba(212,175,55,0.08), transparent 35%),
+                radial-gradient(circle at 85% 80%, rgba(192,192,192,0.05), transparent 40%);
+            opacity: 0.6;
         }
 
         .hero::after {
             content: '';
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 15px,
-                rgba(212,175,55,0.05) 15px,
-                rgba(212,175,55,0.05) 30px
-            );
-            animation: drift 25s linear infinite;
-        }
-
-        @keyframes drift {
-            from {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            to {
-                transform: translate(-25%, -25%) rotate(360deg);
-            }
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold) 50%, transparent);
+            box-shadow: 0 0 20px rgba(212,175,55,0.5);
         }
 
         .hero-content {
             text-align: center;
             z-index: 2;
             position: relative;
-            animation: fadeInUp 2s ease-out;
-            max-width: 800px;
-            padding: 0 20px;
+            animation: fadeInUp 1.5s ease-out;
+            max-width: 900px;
+            padding: 0 40px;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -299,118 +271,55 @@
         }
 
         .hero h1 {
-            font-size: clamp(3.5rem, 10vw, 7rem);
-            margin-bottom: 30px;
-            background: linear-gradient(45deg, var(--gold), var(--cream), var(--jazz-teal));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 4px;
-            text-shadow: 0 0 30px rgba(212,175,55,0.5);
-            animation: heroGlow 4s ease-in-out infinite alternate;
-            font-weight: bold;
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 25px;
+            color: var(--gold);
+            letter-spacing: 8px;
+            font-weight: 300;
+            text-transform: uppercase;
+            position: relative;
+            line-height: 1.2;
         }
 
-        @keyframes heroGlow {
-            from {
-                filter: drop-shadow(0 0 20px rgba(212,175,55,0.6));
-                transform: scale(1);
-            }
-            to {
-                filter: drop-shadow(0 0 40px rgba(212,175,55,0.9));
-                transform: scale(1.02);
-            }
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--silver), transparent);
         }
 
         .hero p {
-            font-size: clamp(20px, 4vw, 28px);
-            color: var(--cream);
-            margin-bottom: 25px;
-            opacity: 0.95;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+            font-size: clamp(18px, 3vw, 24px);
+            color: var(--silver);
+            margin-bottom: 20px;
+            opacity: 0.9;
             font-style: italic;
+            font-weight: 300;
+            letter-spacing: 2px;
         }
 
         .hero-subtitle {
-            font-size: clamp(16px, 3vw, 20px);
-            opacity: 0.85;
-            color: var(--jazz-teal);
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
-            letter-spacing: 1px;
+            font-size: clamp(14px, 2.5vw, 18px);
+            opacity: 0.7;
+            color: var(--soft-cream);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin-bottom: 25px;
         }
 
-        /* Time Elements Animation */
-        .floating-clocks {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .clock-element {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border: 2px solid rgba(212,175,55,0.3);
-            border-radius: 50%;
-            animation: floatClock 8s ease-in-out infinite;
-        }
-
-        .clock-element::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 2px;
-            background: rgba(212,175,55,0.6);
-            transform-origin: left center;
-            transform: translate(-50%, -50%) rotate(45deg);
-        }
-
-        .clock-element:nth-child(1) {
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .clock-element:nth-child(2) {
-            top: 60%;
-            right: 15%;
-            animation-delay: 2s;
-        }
-
-        .clock-element:nth-child(3) {
-            bottom: 25%;
-            left: 20%;
-            animation-delay: 4s;
-        }
-
-        .clock-element:nth-child(4) {
-            top: 30%;
-            right: 30%;
-            animation-delay: 6s;
-        }
-
-        @keyframes floatClock {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.4;
-            }
-            50% {
-                transform: translateY(-30px) rotate(180deg);
-                opacity: 0.8;
-            }
-        }
+        /* Removed floating clocks for cleaner, more elegant design */
 
         /* Friday Jam Session */
         .jam-session {
-            background: linear-gradient(180deg, var(--dark-gray), var(--black));
+            background: var(--black);
             padding: 120px 20px;
             position: relative;
+            border-top: 1px solid rgba(192,192,192,0.1);
         }
 
         .jam-content {
@@ -423,37 +332,28 @@
         }
 
         .jam-info h2 {
-            font-size: clamp(36px, 6vw, 52px);
+            font-size: clamp(36px, 6vw, 48px);
             color: var(--gold);
             margin-bottom: 30px;
             position: relative;
-            animation: pulse 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.03);
-            }
+            font-weight: 300;
+            letter-spacing: 3px;
         }
 
         .jam-highlight {
-            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(74,144,164,0.1));
-            border-left: 4px solid var(--gold);
+            background: rgba(212,175,55,0.05);
+            border-left: 2px solid var(--gold);
             padding: 35px;
             margin: 35px 0;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: 0;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(212,175,55,0.1);
         }
 
         .jam-highlight:hover {
-            background: linear-gradient(135deg, rgba(212,175,55,0.25), rgba(74,144,164,0.15));
-            transform: translateX(15px);
-            box-shadow: 0 15px 50px rgba(212,175,55,0.4);
+            background: rgba(212,175,55,0.08);
+            transform: translateX(10px);
+            border-left-width: 3px;
         }
 
         .jam-highlight h3 {
@@ -465,56 +365,44 @@
         .jam-visual {
             position: relative;
             height: 450px;
-            background: radial-gradient(circle, rgba(212,175,55,0.2), rgba(74,144,164,0.1), transparent);
+            background: rgba(212,175,55,0.03);
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 25px;
+            border-radius: 0;
             overflow: hidden;
-            border: 2px solid rgba(212,175,55,0.3);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-left: 3px solid var(--gold);
         }
 
         .music-notes {
             position: absolute;
-            font-size: 45px;
+            font-size: 120px;
             color: var(--gold);
-            animation: float 6s ease-in-out infinite;
-            text-shadow: 0 0 20px rgba(212,175,55,0.6);
+            opacity: 0.15;
+            user-select: none;
         }
 
         .music-notes:nth-child(1) {
             top: 20%;
-            left: 10%;
-            animation-delay: 0s;
+            left: 15%;
         }
 
         .music-notes:nth-child(2) {
-            top: 60%;
+            top: 55%;
             right: 20%;
-            animation-delay: 2s;
         }
 
         .music-notes:nth-child(3) {
-            bottom: 30%;
-            left: 30%;
-            animation-delay: 4s;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.7;
-            }
-            50% {
-                transform: translateY(-40px) rotate(15deg);
-                opacity: 1;
-            }
+            bottom: 25%;
+            left: 35%;
         }
 
         /* Services */
         .services {
             padding: 120px 20px;
-            background: linear-gradient(180deg, var(--black), var(--dark-gray));
+            background: var(--black);
+            border-top: 1px solid rgba(192,192,192,0.1);
         }
 
         .services-container {
@@ -524,26 +412,28 @@
 
         .services h2 {
             text-align: center;
-            font-size: clamp(36px, 6vw, 52px);
+            font-size: clamp(36px, 6vw, 48px);
             color: var(--gold);
             margin-bottom: 80px;
+            font-weight: 300;
+            letter-spacing: 3px;
         }
 
         .service-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 50px;
+            gap: 40px;
         }
 
         .service-card {
-            background: linear-gradient(135deg, var(--light-gray), var(--dark-gray));
+            background: rgba(212,175,55,0.02);
             padding: 45px;
-            border-radius: 25px;
-            border: 2px solid transparent;
+            border-radius: 0;
+            border: 1px solid rgba(212,175,55,0.15);
+            border-top: 2px solid var(--gold);
             position: relative;
             overflow: hidden;
-            transition: all 0.5s ease;
-            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .service-card::before {
@@ -551,21 +441,20 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, transparent, rgba(212,175,55,0.15), rgba(74,144,164,0.1));
-            opacity: 0;
-            transition: opacity 0.5s ease;
+            width: 2px;
+            height: 0;
+            background: var(--gold);
+            transition: height 0.3s ease;
         }
 
         .service-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 25px 60px rgba(212,175,55,0.4);
+            background: rgba(212,175,55,0.05);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 30px rgba(212,175,55,0.15);
         }
 
         .service-card:hover::before {
-            opacity: 1;
+            height: 100%;
         }
 
         .service-icon {
@@ -593,8 +482,9 @@
 
         /* Contact Section */
         .contact {
-            background: linear-gradient(180deg, var(--dark-gray), var(--black));
+            background: var(--black);
             padding: 120px 20px;
+            border-top: 1px solid rgba(192,192,192,0.1);
         }
 
         .contact-container {
@@ -604,37 +494,41 @@
         }
 
         .contact h2 {
-            font-size: clamp(36px, 6vw, 52px);
+            font-size: clamp(36px, 6vw, 48px);
             color: var(--gold);
             margin-bottom: 60px;
+            font-weight: 300;
+            letter-spacing: 3px;
         }
 
         .contact-info {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 35px;
+            gap: 30px;
             margin-bottom: 50px;
         }
 
         .contact-item {
             padding: 35px;
-            background: linear-gradient(135deg, rgba(212,175,55,0.08), rgba(74,144,164,0.05));
-            border-radius: 20px;
-            border: 1px solid rgba(212,175,55,0.3);
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
+            background: rgba(212,175,55,0.03);
+            border-radius: 0;
+            border: 1px solid rgba(212,175,55,0.15);
+            border-top: 2px solid var(--silver);
+            transition: all 0.3s ease;
         }
 
         .contact-item:hover {
-            background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(74,144,164,0.1));
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(212,175,55,0.3);
+            background: rgba(212,175,55,0.06);
+            border-top-color: var(--gold);
+            transform: translateY(-5px);
         }
 
         .contact-item h3 {
             color: var(--gold);
             margin-bottom: 15px;
-            font-size: 22px;
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
 
         .contact-item p {
@@ -643,7 +537,7 @@
         }
 
         .contact-item a {
-            color: var(--cream);
+            color: var(--silver);
             text-decoration: none;
             transition: color 0.3s ease;
         }
@@ -655,41 +549,40 @@
         /* CTA Button */
         .cta-button {
             display: inline-block;
-            padding: 20px 45px;
-            background: linear-gradient(45deg, var(--gold), var(--dark-gold));
+            padding: 18px 50px;
+            background: var(--gold);
             color: var(--black);
             text-decoration: none;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             margin-top: 30px;
-            box-shadow: 0 10px 30px rgba(212,175,55,0.3);
+            border: 1px solid var(--gold);
         }
 
         .cta-button::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-gold);
+            transition: left 0.3s ease;
+            z-index: -1;
         }
 
         .cta-button:hover {
-            transform: scale(1.08);
-            box-shadow: 0 20px 50px rgba(212,175,55,0.5);
+            color: var(--cream);
         }
 
         .cta-button:hover::before {
-            width: 300px;
-            height: 300px;
+            left: 0;
         }
 
         /* Footer */
@@ -743,10 +636,6 @@
                 grid-template-columns: 1fr;
                 gap: 25px;
             }
-
-            .floating-clocks {
-                display: none;
-            }
         }
 
         @media (max-width: 480px) {
@@ -754,9 +643,219 @@
                 min-height: 100vh;
                 padding: 0 10px;
             }
-            
+
             .jam-session, .services, .contact {
                 padding: 80px 15px;
+            }
+        }
+
+        /* Status Badge Styles - Elegant Design */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 35px;
+            background: rgba(212,175,55,0.05);
+            border-radius: 0;
+            margin-top: 30px;
+            border: 1px solid rgba(192,192,192,0.2);
+            border-left: 3px solid var(--silver);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+        }
+
+        .status-badge:hover {
+            background: rgba(212,175,55,0.08);
+            border-left-color: var(--gold);
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--dark-silver);
+            box-shadow: 0 0 5px rgba(140,140,140,0.4);
+        }
+
+        .status-badge.open .status-indicator {
+            background: var(--gold);
+            box-shadow: 0 0 10px rgba(212,175,55,0.6);
+        }
+
+        .status-text {
+            color: var(--silver);
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .status-badge.open .status-text {
+            color: var(--gold);
+        }
+
+        /* Small Status Badge for Contact Section */
+        .status-badge-small {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: rgba(212,175,55,0.05);
+            border-radius: 0;
+            border: 1px solid rgba(192,192,192,0.2);
+            border-left: 2px solid var(--silver);
+            transition: all 0.3s ease;
+        }
+
+        .status-indicator-small {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--dark-silver);
+            box-shadow: 0 0 5px rgba(140,140,140,0.3);
+        }
+
+        .status-badge-small.open .status-indicator-small {
+            background: var(--gold);
+            box-shadow: 0 0 8px rgba(212,175,55,0.5);
+        }
+
+        .status-text-small {
+            color: var(--silver);
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .status-badge-small.open .status-text-small {
+            color: var(--gold);
+        }
+
+        /* Admin Toggle Button - Elegant Design */
+        .admin-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(212,175,55,0.3);
+            transition: all 0.3s ease;
+            border: 1px solid var(--dark-gold);
+        }
+
+        .admin-toggle:hover {
+            background: var(--dark-gold);
+            box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+        }
+
+        .admin-toggle::before {
+            content: '⚙';
+            font-size: 22px;
+            color: var(--black);
+        }
+
+        .admin-panel {
+            position: fixed;
+            bottom: 90px;
+            right: 30px;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            border-radius: 0;
+            border: 1px solid rgba(212,175,55,0.3);
+            border-top: 2px solid var(--gold);
+            z-index: 9998;
+            display: none;
+            min-width: 220px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+        }
+
+        .admin-panel.active {
+            display: block;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .admin-panel h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .admin-panel button {
+            width: 100%;
+            padding: 12px;
+            margin: 6px 0;
+            background: rgba(212,175,55,0.05);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-left: 2px solid var(--silver);
+            color: var(--silver);
+            border-radius: 0;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-panel button:hover {
+            background: rgba(212,175,55,0.08);
+            border-left-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .admin-panel button.active {
+            background: rgba(212,175,55,0.1);
+            border-left-color: var(--gold);
+            color: var(--gold);
+        }
+
+        @media (max-width: 768px) {
+            .status-badge {
+                padding: 14px 25px;
+            }
+
+            .status-text {
+                font-size: 16px;
+            }
+
+            .admin-toggle {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .admin-toggle::before {
+                font-size: 24px;
+            }
+
+            .admin-panel {
+                right: 20px;
+                bottom: 80px;
+                min-width: 220px;
             }
         }
     </style>
@@ -773,6 +872,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#jam-session">Jam Session</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="events.html">Events</a></li>
                 <li><a href="#contact">Kontakt</a></li>
             </ul>
             <div class="hamburger" onclick="toggleMobileMenu()">
@@ -787,27 +887,23 @@
             <a href="#home" onclick="closeMobileMenu()">Home</a>
             <a href="#jam-session" onclick="closeMobileMenu()">Jam Session</a>
             <a href="#services" onclick="closeMobileMenu()">Services</a>
+            <a href="events.html" onclick="closeMobileMenu()">Events</a>
             <a href="#contact" onclick="closeMobileMenu()">Kontakt</a>
         </div>
     </nav>
 
-    <!-- Hero Section with Real Artwork Background -->
+    <!-- Hero Section - Elegant & Refined -->
     <section id="home" class="hero">
-        <!-- Artwork Overlay for better text readability -->
-        <div class="hero-artwork-overlay"></div>
-        
-        <!-- Floating Clock Elements (subtle addition to your artwork) -->
-        <div class="floating-clocks">
-            <div class="clock-element"></div>
-            <div class="clock-element"></div>
-            <div class="clock-element"></div>
-            <div class="clock-element"></div>
-        </div>
-        
         <div class="hero-content">
             <h1>Premium Jazz Club</h1>
             <p>Basel's Finest Jazz Experience</p>
             <p class="hero-subtitle">Where Time Stands Still for Music</p>
+
+            <!-- Club Status Badge -->
+            <div class="status-badge" id="heroStatusBadge">
+                <span class="status-indicator"></span>
+                <span class="status-text">Club geschlossen</span>
+            </div>
         </div>
     </section>
 
@@ -910,6 +1006,12 @@
                     <p>Mi-Sa: 19:00 - 02:00<br>
                     Jam Session: Fr ab 22:00<br>
                     <span style="color: var(--gold);">Walk-in!</span></p>
+
+                    <!-- Club Status -->
+                    <div class="status-badge-small" id="contactStatusBadge" style="margin-top: 15px;">
+                        <span class="status-indicator-small"></span>
+                        <span class="status-text-small">Club geschlossen</span>
+                    </div>
                 </div>
             </div>
 
@@ -928,6 +1030,16 @@
     <footer>
         <p>&copy; 2024 Premium Jazz Club Basel. Where Jazz Lives.</p>
     </footer>
+
+    <!-- Admin Toggle Button -->
+    <div class="admin-toggle" id="adminToggle" onclick="toggleAdminPanel()"></div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <h3>Club Status</h3>
+        <button onclick="setClubStatus('open')" id="btnOpen">🟢 Club geöffnet</button>
+        <button onclick="setClubStatus('closed')" id="btnClosed" class="active">⚫ Club geschlossen</button>
+    </div>
 
     <script>
         // Smooth scroll behavior for navigation links
@@ -1001,40 +1113,83 @@
             const mobileMenu = document.getElementById('mobileMenu');
             const hamburger = document.querySelector('.hamburger');
             const navContainer = document.querySelector('.nav-container');
-            
+
             if (!navContainer.contains(e.target) && mobileMenu.classList.contains('active')) {
                 closeMobileMenu();
             }
         });
 
-        // Add subtle hover effects for floating clocks
-        document.querySelectorAll('.clock-element').forEach((clock, index) => {
-            clock.addEventListener('mouseenter', function() {
-                this.style.animationPlayState = 'paused';
-                this.style.transform = 'scale(1.2)';
-                this.style.opacity = '1';
-            });
-            
-            clock.addEventListener('mouseleave', function() {
-                this.style.animationPlayState = 'running';
-                this.style.transform = 'scale(1)';
-                this.style.opacity = '0.6';
-            });
-        });
+        // ===== CLUB STATUS MANAGEMENT =====
 
-        // Dynamic color shifting for hero background
-        setInterval(() => {
-            const hero = document.querySelector('.hero::before');
-            if (hero) {
-                const colors = [
-                    'rgba(74,144,164,0.4)',
-                    'rgba(95,179,170,0.3)', 
-                    'rgba(138,43,226,0.2)',
-                    'rgba(212,175,55,0.3)'
-                ];
-                // This would be more complex to implement, keeping current CSS animation
+        // Toggle Admin Panel
+        function toggleAdminPanel() {
+            const panel = document.getElementById('adminPanel');
+            panel.classList.toggle('active');
+        }
+
+        // Set Club Status
+        function setClubStatus(status) {
+            const heroBadge = document.getElementById('heroStatusBadge');
+            const contactBadge = document.getElementById('contactStatusBadge');
+            const btnOpen = document.getElementById('btnOpen');
+            const btnClosed = document.getElementById('btnClosed');
+
+            if (status === 'open') {
+                // Update Hero Badge
+                heroBadge.classList.add('open');
+                heroBadge.querySelector('.status-text').textContent = 'Club geöffnet';
+
+                // Update Contact Badge
+                contactBadge.classList.add('open');
+                contactBadge.querySelector('.status-text-small').textContent = 'Jetzt geöffnet!';
+
+                // Update Buttons
+                btnOpen.classList.add('active');
+                btnClosed.classList.remove('active');
+
+                // Save to LocalStorage
+                localStorage.setItem('clubStatus', 'open');
+            } else {
+                // Update Hero Badge
+                heroBadge.classList.remove('open');
+                heroBadge.querySelector('.status-text').textContent = 'Club geschlossen';
+
+                // Update Contact Badge
+                contactBadge.classList.remove('open');
+                contactBadge.querySelector('.status-text-small').textContent = 'Club geschlossen';
+
+                // Update Buttons
+                btnOpen.classList.remove('active');
+                btnClosed.classList.add('active');
+
+                // Save to LocalStorage
+                localStorage.setItem('clubStatus', 'closed');
             }
-        }, 5000);
+
+            // Close admin panel after selection
+            setTimeout(() => {
+                document.getElementById('adminPanel').classList.remove('active');
+            }, 500);
+        }
+
+        // Load Status from LocalStorage on Page Load
+        function loadClubStatus() {
+            const savedStatus = localStorage.getItem('clubStatus') || 'closed';
+            setClubStatus(savedStatus);
+        }
+
+        // Initialize status on page load
+        window.addEventListener('DOMContentLoaded', loadClubStatus);
+
+        // Close admin panel when clicking outside
+        document.addEventListener('click', function(e) {
+            const adminPanel = document.getElementById('adminPanel');
+            const adminToggle = document.getElementById('adminToggle');
+
+            if (!adminPanel.contains(e.target) && !adminToggle.contains(e.target)) {
+                adminPanel.classList.remove('active');
+            }
+        });
     </script>
 </body>
 </html>
