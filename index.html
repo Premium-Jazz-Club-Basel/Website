@@ -1601,16 +1601,16 @@
             const clocks = document.querySelectorAll('.swiss-clock .clock-face');
 
             clocks.forEach(clockFace => {
-                // All marker tips should end at same circle edge (450% from center)
-                const targetEdge = 450;
+                // All marker tips should end at 48% from center (near the clock edge)
+                const tipPosition = 48; // Where tips should be (in % of clock size)
 
-                // Calculate translate for each marker type so tips align at targetEdge
-                // Main markers: 10% height -> tip at 450%, base at 440%
-                const mainTranslate = `${-(targetEdge - 10)}%`;
-                // Hour markers: 8% height -> tip at 450%, base at 442%
-                const hourTranslate = `${-(targetEdge - 8)}%`;
-                // Minute markers: 6% height -> tip at 450%, base at 444%
-                const minuteTranslate = `${-(targetEdge - 6)}%`;
+                // Calculate translate for each marker: move base so tip reaches tipPosition
+                // Main markers: 10% height -> base at 38%, translate = -38% / 10% = -380%
+                const mainTranslate = `-${(tipPosition - 10) / 10 * 100}%`;
+                // Hour markers: 8% height -> base at 40%, translate = -40% / 8% = -500%
+                const hourTranslate = `-${(tipPosition - 8) / 8 * 100}%`;
+                // Minute markers: 6% height -> base at 42%, translate = -42% / 6% = -700%
+                const minuteTranslate = `-${(tipPosition - 6) / 6 * 100}%`;
 
                 // Adjust main hour markers (12, 3, 6, 9) to edge
                 const mainMarkers = clockFace.querySelectorAll('.clock-marker.main');
@@ -1619,7 +1619,7 @@
                     const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
                     if (rotateMatch) {
                         const angle = rotateMatch[1];
-                        marker.style.transform = `rotate(${angle}) translate(-50%, ${mainTranslate})`;
+                        marker.style.transform = `translate(-50%, ${mainTranslate}) rotate(${angle})`;
                     }
                 });
 
@@ -1630,7 +1630,7 @@
                     const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
                     if (rotateMatch) {
                         const angle = rotateMatch[1];
-                        marker.style.transform = `rotate(${angle}) translate(-50%, ${hourTranslate})`;
+                        marker.style.transform = `translate(-50%, ${hourTranslate}) rotate(${angle})`;
                     }
                 });
 
@@ -1644,7 +1644,7 @@
                     const minuteMarker = document.createElement('div');
                     minuteMarker.className = 'clock-marker minute';
                     // Position tip at edge - compensate for shorter height
-                    minuteMarker.style.transform = `rotate(${angle}deg) translate(-50%, ${minuteTranslate})`;
+                    minuteMarker.style.transform = `translate(-50%, ${minuteTranslate}) rotate(${angle}deg)`;
 
                     clockFace.appendChild(minuteMarker);
                 }
@@ -1656,7 +1656,7 @@
                     const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
                     if (rotateMatch) {
                         const angle = rotateMatch[1];
-                        hand.style.transform = `rotate(${angle}) translate(-50%, -100%)`;
+                        hand.style.transform = `translate(-50%, -100%) rotate(${angle})`;
                     }
                 });
 
@@ -1666,7 +1666,7 @@
                     const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
                     if (rotateMatch) {
                         const angle = rotateMatch[1];
-                        hand.style.transform = `rotate(${angle}) translate(-50%, -100%)`;
+                        hand.style.transform = `translate(-50%, -100%) rotate(${angle})`;
                     }
                 });
             });
