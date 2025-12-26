@@ -402,22 +402,22 @@
             background: #c0c0c0;
         }
 
-        /* Main hour markers (12, 3, 6, 9) - thick rectangles */
+        /* Main hour markers (12, 3, 6, 9) - thick rectangles at edge */
         .clock-marker.main {
             width: 4%;
-            height: 16%;
+            height: 10%;
         }
 
-        /* Other hour markers - medium rectangles */
+        /* Other hour markers - medium rectangles at edge */
         .clock-marker.hour {
             width: 3%;
-            height: 13%;
+            height: 8%;
         }
 
-        /* Minute markers - very thin and short */
+        /* Minute markers - very thin and short, positioned at the edge */
         .clock-marker.minute {
             width: 1.5%;
-            height: 8%;
+            height: 6%;
         }
 
         .clock-hand {
@@ -1596,12 +1596,34 @@
     </div>
 
     <script>
-        // Generate minute markers for all Swiss Railway clocks
-        function generateClockMinuteMarkers() {
+        // Adjust all clock markers to be positioned at the edge
+        function adjustClockMarkers() {
             const clocks = document.querySelectorAll('.swiss-clock .clock-face');
 
             clocks.forEach(clockFace => {
-                // Generate all 60 minute markers
+                // Adjust main hour markers (12, 3, 6, 9) to edge
+                const mainMarkers = clockFace.querySelectorAll('.clock-marker.main');
+                mainMarkers.forEach(marker => {
+                    const currentTransform = marker.style.transform;
+                    const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
+                    if (rotateMatch) {
+                        const angle = rotateMatch[1];
+                        marker.style.transform = `translate(-50%, -500%) rotate(${angle})`;
+                    }
+                });
+
+                // Adjust other hour markers to edge
+                const hourMarkers = clockFace.querySelectorAll('.clock-marker.hour');
+                hourMarkers.forEach(marker => {
+                    const currentTransform = marker.style.transform;
+                    const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
+                    if (rotateMatch) {
+                        const angle = rotateMatch[1];
+                        marker.style.transform = `translate(-50%, -625%) rotate(${angle})`;
+                    }
+                });
+
+                // Generate all 60 minute markers at the edge
                 for (let i = 0; i < 60; i++) {
                     const angle = i * 6; // 360 / 60 = 6 degrees per minute
 
@@ -1610,15 +1632,16 @@
 
                     const minuteMarker = document.createElement('div');
                     minuteMarker.className = 'clock-marker minute';
-                    minuteMarker.style.transform = `translate(-50%, -100%) rotate(${angle}deg)`;
+                    // Position at the edge: translate by 800% of height to push them to the outer edge
+                    minuteMarker.style.transform = `translate(-50%, -800%) rotate(${angle}deg)`;
 
                     clockFace.appendChild(minuteMarker);
                 }
             });
         }
 
-        // Generate minute markers when DOM is loaded
-        document.addEventListener('DOMContentLoaded', generateClockMinuteMarkers);
+        // Adjust markers when DOM is loaded
+        document.addEventListener('DOMContentLoaded', adjustClockMarkers);
 
         // Smooth scroll behavior for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
