@@ -1601,13 +1601,16 @@
             const clocks = document.querySelectorAll('.swiss-clock .clock-face');
 
             clocks.forEach(clockFace => {
-                // Each marker type needs different translate to align tips at same circle
-                // Main markers: 10% height -> translate to position tip at edge
-                const mainTranslate = '-400%';
-                // Hour markers: 8% height -> needs stronger translate to reach same edge
-                const hourTranslate = '-475%';
-                // Minute markers: 6% height -> needs even stronger translate
-                const minuteTranslate = '-567%';
+                // All marker tips should end at same circle edge (450% from center)
+                const targetEdge = 450;
+
+                // Calculate translate for each marker type so tips align at targetEdge
+                // Main markers: 10% height -> tip at 450%, base at 440%
+                const mainTranslate = `${-(targetEdge - 10)}%`;
+                // Hour markers: 8% height -> tip at 450%, base at 442%
+                const hourTranslate = `${-(targetEdge - 8)}%`;
+                // Minute markers: 6% height -> tip at 450%, base at 444%
+                const minuteTranslate = `${-(targetEdge - 6)}%`;
 
                 // Adjust main hour markers (12, 3, 6, 9) to edge
                 const mainMarkers = clockFace.querySelectorAll('.clock-marker.main');
@@ -1645,6 +1648,27 @@
 
                     clockFace.appendChild(minuteMarker);
                 }
+
+                // Fix clock hands transform order
+                const hourHands = clockFace.querySelectorAll('.clock-hand.hour-hand');
+                hourHands.forEach(hand => {
+                    const currentTransform = hand.style.transform;
+                    const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
+                    if (rotateMatch) {
+                        const angle = rotateMatch[1];
+                        hand.style.transform = `rotate(${angle}) translate(-50%, -100%)`;
+                    }
+                });
+
+                const minuteHands = clockFace.querySelectorAll('.clock-hand.minute-hand');
+                minuteHands.forEach(hand => {
+                    const currentTransform = hand.style.transform;
+                    const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
+                    if (rotateMatch) {
+                        const angle = rotateMatch[1];
+                        hand.style.transform = `rotate(${angle}) translate(-50%, -100%)`;
+                    }
+                });
             });
         }
 
