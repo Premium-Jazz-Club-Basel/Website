@@ -312,7 +312,7 @@
             margin-bottom: 25px;
         }
 
-        /* Elegant Art-Deco Clock Wall */
+        /* Swiss Railway Clock Wall */
         .clock-wall {
             position: absolute;
             top: 0;
@@ -324,59 +324,50 @@
             overflow: hidden;
         }
 
-        .art-deco-clock {
+        .swiss-clock {
             position: absolute;
             width: 150px;
             height: 150px;
-            opacity: 0.08;
+            opacity: 0.12;
         }
 
-        .art-deco-clock:nth-child(1) {
-            top: 15%;
-            left: 8%;
-            width: 120px;
-            height: 120px;
-        }
-
-        .art-deco-clock:nth-child(2) {
-            top: 60%;
-            left: 12%;
-            width: 100px;
-            height: 100px;
-            opacity: 0.06;
-        }
-
-        .art-deco-clock:nth-child(3) {
-            top: 20%;
-            right: 10%;
-            width: 140px;
-            height: 140px;
-        }
-
-        .art-deco-clock:nth-child(4) {
-            top: 65%;
-            right: 8%;
-            width: 110px;
-            height: 110px;
-            opacity: 0.07;
-        }
-
-        .art-deco-clock:nth-child(5) {
-            top: 40%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90px;
-            height: 90px;
-            opacity: 0.05;
-        }
+        /* 20 Clocks - Better Distributed */
+        .swiss-clock:nth-child(1) { top: 8%; left: 5%; width: 130px; height: 130px; }
+        .swiss-clock:nth-child(2) { top: 72%; left: 7%; width: 110px; height: 110px; opacity: 0.09; }
+        .swiss-clock:nth-child(3) { top: 15%; left: 18%; width: 95px; height: 95px; opacity: 0.10; }
+        .swiss-clock:nth-child(4) { top: 58%; left: 15%; width: 85px; height: 85px; opacity: 0.08; }
+        .swiss-clock:nth-child(5) { top: 28%; left: 12%; width: 100px; height: 100px; opacity: 0.11; }
+        .swiss-clock:nth-child(6) { top: 45%; left: 25%; width: 75px; height: 75px; opacity: 0.07; }
+        .swiss-clock:nth-child(7) { top: 82%; left: 22%; width: 90px; height: 90px; opacity: 0.09; }
+        .swiss-clock:nth-child(8) { top: 12%; left: 35%; width: 105px; height: 105px; opacity: 0.10; }
+        .swiss-clock:nth-child(9) { top: 65%; left: 38%; width: 95px; height: 95px; opacity: 0.08; }
+        .swiss-clock:nth-child(10) { top: 35%; left: 48%; width: 85px; height: 85px; opacity: 0.07; }
+        .swiss-clock:nth-child(11) { top: 78%; left: 50%; width: 100px; height: 100px; opacity: 0.09; }
+        .swiss-clock:nth-child(12) { top: 5%; right: 45%; width: 110px; height: 110px; opacity: 0.11; }
+        .swiss-clock:nth-child(13) { top: 50%; right: 42%; width: 80px; height: 80px; opacity: 0.06; }
+        .swiss-clock:nth-child(14) { top: 22%; right: 35%; width: 95px; height: 95px; opacity: 0.09; }
+        .swiss-clock:nth-child(15) { top: 68%; right: 30%; width: 105px; height: 105px; opacity: 0.10; }
+        .swiss-clock:nth-child(16) { top: 40%; right: 22%; width: 90px; height: 90px; opacity: 0.08; }
+        .swiss-clock:nth-child(17) { top: 10%; right: 18%; width: 115px; height: 115px; opacity: 0.11; }
+        .swiss-clock:nth-child(18) { top: 75%; right: 15%; width: 85px; height: 85px; opacity: 0.08; }
+        .swiss-clock:nth-child(19) { top: 55%; right: 8%; width: 100px; height: 100px; opacity: 0.09; }
+        .swiss-clock:nth-child(20) { top: 18%; right: 6%; width: 125px; height: 125px; opacity: 0.12; }
 
         .clock-face {
             width: 100%;
             height: 100%;
-            border: 2px solid var(--gold);
+            border: 3px solid #333;
             border-radius: 50%;
             position: relative;
-            background: radial-gradient(circle at center, rgba(212,175,55,0.05), transparent 70%);
+            background: white;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Inverted Clock Face - Black with Silver */
+        .swiss-clock.inverted .clock-face {
+            background: #1a1a1a;
+            border-color: #888;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.05);
         }
 
         .clock-face::before {
@@ -385,60 +376,84 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 6px;
-            height: 6px;
-            background: var(--gold);
+            width: 6%;
+            height: 6%;
+            background: #000;
             border-radius: 50%;
-            z-index: 3;
+            z-index: 10;
+        }
+
+        .swiss-clock.inverted .clock-face::before {
+            background: #c0c0c0;
         }
 
         .clock-marker {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 1.5px;
-            height: 45%;
-            background: var(--silver);
+            background: #000;
             transform-origin: center bottom;
         }
 
-        .clock-marker.hour-12 { transform: translate(-50%, -100%) rotate(0deg); }
-        .clock-marker.hour-3 { transform: translate(-50%, -100%) rotate(90deg); height: 40%; }
-        .clock-marker.hour-6 { transform: translate(-50%, -100%) rotate(180deg); }
-        .clock-marker.hour-9 { transform: translate(-50%, -100%) rotate(270deg); height: 40%; }
+        .swiss-clock.inverted .clock-marker {
+            background: #c0c0c0;
+        }
+
+        /* Main hour markers (12, 3, 6, 9) - thick rectangles */
+        .clock-marker.main {
+            width: 4%;
+            height: 16%;
+        }
+
+        /* Other hour markers - medium rectangles */
+        .clock-marker.hour {
+            width: 3%;
+            height: 13%;
+        }
 
         .clock-hand {
             position: absolute;
             top: 50%;
             left: 50%;
-            background: var(--gold);
-            border-radius: 1px;
+            background: #000;
             transform-origin: center bottom;
-            z-index: 2;
+            z-index: 5;
+        }
+
+        .swiss-clock.inverted .clock-hand {
+            background: #c0c0c0;
         }
 
         .hour-hand {
-            width: 2px;
+            width: 4%;
             height: 28%;
-            transform: translate(-50%, -100%) rotate(135deg);
+            border-radius: 2px 2px 0 0;
         }
 
         .minute-hand {
-            width: 1.5px;
-            height: 38%;
-            transform: translate(-50%, -100%) rotate(90deg);
+            width: 3%;
+            height: 40%;
+            border-radius: 2px 2px 0 0;
+        }
+
+        @media (max-width: 1600px) {
+            .swiss-clock:nth-child(n+17) { display: none; }
+        }
+
+        @media (max-width: 1400px) {
+            .swiss-clock:nth-child(n+13) { display: none; }
         }
 
         @media (max-width: 1200px) {
-            .art-deco-clock:nth-child(5) {
-                display: none;
-            }
+            .swiss-clock:nth-child(n+10) { display: none; }
+        }
+
+        @media (max-width: 1024px) {
+            .swiss-clock:nth-child(n+7) { display: none; }
         }
 
         @media (max-width: 768px) {
-            .clock-wall {
-                display: none;
-            }
+            .clock-wall { display: none; }
         }
 
         /* Friday Jam Session */
@@ -1021,65 +1036,405 @@
 
     <!-- Hero Section - Elegant & Refined -->
     <section id="home" class="hero">
-        <!-- Art Deco Clock Wall -->
+        <!-- Swiss Railway Clock Wall - 20 Clocks -->
         <div class="clock-wall">
             <!-- Clock 1: 10:10 -->
-            <div class="art-deco-clock">
+            <div class="swiss-clock">
                 <div class="clock-face">
-                    <div class="clock-marker hour-12"></div>
-                    <div class="clock-marker hour-3"></div>
-                    <div class="clock-marker hour-6"></div>
-                    <div class="clock-marker hour-9"></div>
-                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(305deg);"></div>
                     <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
                 </div>
             </div>
 
             <!-- Clock 2: 3:45 -->
-            <div class="art-deco-clock">
+            <div class="swiss-clock">
                 <div class="clock-face">
-                    <div class="clock-marker hour-12"></div>
-                    <div class="clock-marker hour-3"></div>
-                    <div class="clock-marker hour-6"></div>
-                    <div class="clock-marker hour-9"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
                     <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(112deg);"></div>
                     <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
                 </div>
             </div>
 
-            <!-- Clock 3: 8:20 -->
-            <div class="art-deco-clock">
+            <!-- Clock 3: 8:20 INVERTED -->
+            <div class="swiss-clock inverted">
                 <div class="clock-face">
-                    <div class="clock-marker hour-12"></div>
-                    <div class="clock-marker hour-3"></div>
-                    <div class="clock-marker hour-6"></div>
-                    <div class="clock-marker hour-9"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
                     <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(250deg);"></div>
                     <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
                 </div>
             </div>
 
             <!-- Clock 4: 11:30 -->
-            <div class="art-deco-clock">
+            <div class="swiss-clock">
                 <div class="clock-face">
-                    <div class="clock-marker hour-12"></div>
-                    <div class="clock-marker hour-3"></div>
-                    <div class="clock-marker hour-6"></div>
-                    <div class="clock-marker hour-9"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
                     <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(345deg);"></div>
                     <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
                 </div>
             </div>
 
             <!-- Clock 5: 6:15 -->
-            <div class="art-deco-clock">
+            <div class="swiss-clock">
                 <div class="clock-face">
-                    <div class="clock-marker hour-12"></div>
-                    <div class="clock-marker hour-3"></div>
-                    <div class="clock-marker hour-6"></div>
-                    <div class="clock-marker hour-9"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
                     <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(187deg);"></div>
                     <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 6: 2:25 -->
+            <div class="swiss-clock">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(72deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 7: 9:50 INVERTED -->
+            <div class="swiss-clock inverted">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(295deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 8: 4:05 -->
+            <div class="swiss-clock">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(122deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 9: 7:35 -->
+            <div class="swiss-clock">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(227deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 10: 1:40 -->
+            <div class="swiss-clock">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(50deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 11: 5:55 INVERTED -->
+            <div class="swiss-clock inverted">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(177deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 12: 12:00 -->
+            <div class="swiss-clock">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 13: 3:15 -->
+            <div class="swiss-clock">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(97deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 14: 8:45 -->
+            <div class="swiss-clock">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(262deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 15: 10:30 INVERTED -->
+            <div class="swiss-clock inverted">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(315deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 16: 6:40 -->
+            <div class="swiss-clock">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(200deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 17: 2:10 -->
+            <div class="swiss-clock">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(65deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 18: 9:25 INVERTED -->
+            <div class="swiss-clock inverted">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(282deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 19: 4:50 -->
+            <div class="swiss-clock">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(145deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 20: 7:05 -->
+            <div class="swiss-clock">
+                <div class="clock-face">
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                    <div class="clock-marker main" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(150deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(210deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(240deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-marker hour" style="transform: translate(-50%, -100%) rotate(330deg);"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(212deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(30deg);"></div>
                 </div>
             </div>
         </div>
