@@ -1601,8 +1601,13 @@
             const clocks = document.querySelectorAll('.swiss-clock .clock-face');
 
             clocks.forEach(clockFace => {
-                // All markers at same distance from center - only height differs
-                const translateDistance = '-450%';
+                // Each marker type needs different translate to align tips at same circle
+                // Main markers: 10% height -> translate to position tip at edge
+                const mainTranslate = '-400%';
+                // Hour markers: 8% height -> needs stronger translate to reach same edge
+                const hourTranslate = '-475%';
+                // Minute markers: 6% height -> needs even stronger translate
+                const minuteTranslate = '-567%';
 
                 // Adjust main hour markers (12, 3, 6, 9) to edge
                 const mainMarkers = clockFace.querySelectorAll('.clock-marker.main');
@@ -1611,7 +1616,7 @@
                     const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
                     if (rotateMatch) {
                         const angle = rotateMatch[1];
-                        marker.style.transform = `rotate(${angle}) translate(-50%, ${translateDistance})`;
+                        marker.style.transform = `rotate(${angle}) translate(-50%, ${mainTranslate})`;
                     }
                 });
 
@@ -1622,7 +1627,7 @@
                     const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
                     if (rotateMatch) {
                         const angle = rotateMatch[1];
-                        marker.style.transform = `rotate(${angle}) translate(-50%, ${translateDistance})`;
+                        marker.style.transform = `rotate(${angle}) translate(-50%, ${hourTranslate})`;
                     }
                 });
 
@@ -1635,8 +1640,8 @@
 
                     const minuteMarker = document.createElement('div');
                     minuteMarker.className = 'clock-marker minute';
-                    // Position at the edge: same distance as other markers
-                    minuteMarker.style.transform = `rotate(${angle}deg) translate(-50%, ${translateDistance})`;
+                    // Position tip at edge - compensate for shorter height
+                    minuteMarker.style.transform = `rotate(${angle}deg) translate(-50%, ${minuteTranslate})`;
 
                     clockFace.appendChild(minuteMarker);
                 }
