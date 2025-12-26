@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Jazz Club Basel - Where Jazz Lives</title>
+    <title>Premium Jazz Club Basel - Funkiest Jam Sessions</title>
     <style>
         * {
             margin: 0;
@@ -312,7 +312,134 @@
             margin-bottom: 25px;
         }
 
-        /* Removed floating clocks for cleaner, more elegant design */
+        /* Elegant Art-Deco Clock Wall */
+        .clock-wall {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .art-deco-clock {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            opacity: 0.08;
+        }
+
+        .art-deco-clock:nth-child(1) {
+            top: 15%;
+            left: 8%;
+            width: 120px;
+            height: 120px;
+        }
+
+        .art-deco-clock:nth-child(2) {
+            top: 60%;
+            left: 12%;
+            width: 100px;
+            height: 100px;
+            opacity: 0.06;
+        }
+
+        .art-deco-clock:nth-child(3) {
+            top: 20%;
+            right: 10%;
+            width: 140px;
+            height: 140px;
+        }
+
+        .art-deco-clock:nth-child(4) {
+            top: 65%;
+            right: 8%;
+            width: 110px;
+            height: 110px;
+            opacity: 0.07;
+        }
+
+        .art-deco-clock:nth-child(5) {
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 90px;
+            opacity: 0.05;
+        }
+
+        .clock-face {
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(212,175,55,0.05), transparent 70%);
+        }
+
+        .clock-face::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            z-index: 3;
+        }
+
+        .clock-marker {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1.5px;
+            height: 45%;
+            background: var(--silver);
+            transform-origin: center bottom;
+        }
+
+        .clock-marker.hour-12 { transform: translate(-50%, -100%) rotate(0deg); }
+        .clock-marker.hour-3 { transform: translate(-50%, -100%) rotate(90deg); height: 40%; }
+        .clock-marker.hour-6 { transform: translate(-50%, -100%) rotate(180deg); }
+        .clock-marker.hour-9 { transform: translate(-50%, -100%) rotate(270deg); height: 40%; }
+
+        .clock-hand {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            background: var(--gold);
+            border-radius: 1px;
+            transform-origin: center bottom;
+            z-index: 2;
+        }
+
+        .hour-hand {
+            width: 2px;
+            height: 28%;
+            transform: translate(-50%, -100%) rotate(135deg);
+        }
+
+        .minute-hand {
+            width: 1.5px;
+            height: 38%;
+            transform: translate(-50%, -100%) rotate(90deg);
+        }
+
+        @media (max-width: 1200px) {
+            .art-deco-clock:nth-child(5) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .clock-wall {
+                display: none;
+            }
+        }
 
         /* Friday Jam Session */
         .jam-session {
@@ -894,9 +1021,72 @@
 
     <!-- Hero Section - Elegant & Refined -->
     <section id="home" class="hero">
+        <!-- Art Deco Clock Wall -->
+        <div class="clock-wall">
+            <!-- Clock 1: 10:10 -->
+            <div class="art-deco-clock">
+                <div class="clock-face">
+                    <div class="clock-marker hour-12"></div>
+                    <div class="clock-marker hour-3"></div>
+                    <div class="clock-marker hour-6"></div>
+                    <div class="clock-marker hour-9"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(300deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(60deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 2: 3:45 -->
+            <div class="art-deco-clock">
+                <div class="clock-face">
+                    <div class="clock-marker hour-12"></div>
+                    <div class="clock-marker hour-3"></div>
+                    <div class="clock-marker hour-6"></div>
+                    <div class="clock-marker hour-9"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(112deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(270deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 3: 8:20 -->
+            <div class="art-deco-clock">
+                <div class="clock-face">
+                    <div class="clock-marker hour-12"></div>
+                    <div class="clock-marker hour-3"></div>
+                    <div class="clock-marker hour-6"></div>
+                    <div class="clock-marker hour-9"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(250deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(120deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 4: 11:30 -->
+            <div class="art-deco-clock">
+                <div class="clock-face">
+                    <div class="clock-marker hour-12"></div>
+                    <div class="clock-marker hour-3"></div>
+                    <div class="clock-marker hour-6"></div>
+                    <div class="clock-marker hour-9"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(345deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                </div>
+            </div>
+
+            <!-- Clock 5: 6:15 -->
+            <div class="art-deco-clock">
+                <div class="clock-face">
+                    <div class="clock-marker hour-12"></div>
+                    <div class="clock-marker hour-3"></div>
+                    <div class="clock-marker hour-6"></div>
+                    <div class="clock-marker hour-9"></div>
+                    <div class="clock-hand hour-hand" style="transform: translate(-50%, -100%) rotate(187deg);"></div>
+                    <div class="clock-hand minute-hand" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="hero-content">
             <h1>Premium Jazz Club</h1>
-            <p>Basel's Finest Jazz Experience</p>
+            <p>Basel's Funkiest Jam Sessions</p>
             <p class="hero-subtitle">Where Time Stands Still for Music</p>
 
             <!-- Club Status Badge -->
