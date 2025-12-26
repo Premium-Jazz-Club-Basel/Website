@@ -1601,6 +1601,9 @@
             const clocks = document.querySelectorAll('.swiss-clock .clock-face');
 
             clocks.forEach(clockFace => {
+                // All markers at same distance from center - only height differs
+                const translateDistance = '-500%';
+
                 // Adjust main hour markers (12, 3, 6, 9) to edge
                 const mainMarkers = clockFace.querySelectorAll('.clock-marker.main');
                 mainMarkers.forEach(marker => {
@@ -1608,7 +1611,7 @@
                     const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
                     if (rotateMatch) {
                         const angle = rotateMatch[1];
-                        marker.style.transform = `rotate(${angle}) translate(-50%, -500%)`;
+                        marker.style.transform = `rotate(${angle}) translate(-50%, ${translateDistance})`;
                     }
                 });
 
@@ -1619,7 +1622,7 @@
                     const rotateMatch = currentTransform.match(/rotate\(([^)]+)\)/);
                     if (rotateMatch) {
                         const angle = rotateMatch[1];
-                        marker.style.transform = `rotate(${angle}) translate(-50%, -625%)`;
+                        marker.style.transform = `rotate(${angle}) translate(-50%, ${translateDistance})`;
                     }
                 });
 
@@ -1632,8 +1635,8 @@
 
                     const minuteMarker = document.createElement('div');
                     minuteMarker.className = 'clock-marker minute';
-                    // Position at the edge: rotate first, then translate outward
-                    minuteMarker.style.transform = `rotate(${angle}deg) translate(-50%, -800%)`;
+                    // Position at the edge: same distance as other markers
+                    minuteMarker.style.transform = `rotate(${angle}deg) translate(-50%, ${translateDistance})`;
 
                     clockFace.appendChild(minuteMarker);
                 }
