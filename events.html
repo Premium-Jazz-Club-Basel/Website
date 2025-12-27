@@ -217,6 +217,56 @@
             background: rgba(212,175,55,0.1);
         }
 
+        /* Background Clocks */
+        .background-clocks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .swiss-clock {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+        }
+
+        .clock-face {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(192,192,192,0.05);
+            border: 2px solid rgba(192,192,192,0.1);
+        }
+
+        .clock-face::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8%;
+            height: 8%;
+            background: radial-gradient(circle, #000 0%, #000 60%, #333 100%);
+            border-radius: 50%;
+            z-index: 10;
+        }
+
+        .swiss-clock.inverted .clock-face {
+            background: rgba(0,0,0,0.1);
+            border-color: rgba(0,0,0,0.15);
+        }
+
+        .swiss-clock.inverted .clock-face::before {
+            background: radial-gradient(circle, #c0c0c0 0%, #c0c0c0 60%, #999 100%);
+        }
+
         /* Page Header */
         .page-header {
             padding-top: 140px;
@@ -224,6 +274,8 @@
             text-align: center;
             background: var(--black);
             border-bottom: 1px solid rgba(192,192,192,0.1);
+            position: relative;
+            overflow: hidden;
         }
 
         .page-header h1 {
@@ -254,44 +306,163 @@
             margin: 0 auto;
         }
 
-        .calendar-info {
-            background: rgba(212,175,55,0.03);
-            border-left: 2px solid var(--gold);
-            padding: 30px;
-            margin-bottom: 40px;
-            border-radius: 0;
-            border: 1px solid rgba(212,175,55,0.15);
-            border-left-width: 3px;
+        /* Upcoming Events Section */
+        .upcoming-events {
+            margin-bottom: 60px;
         }
 
-        .calendar-info h2 {
+        .upcoming-events h2 {
             color: var(--gold);
-            font-size: clamp(24px, 4vw, 30px);
-            margin-bottom: 15px;
+            font-size: clamp(28px, 5vw, 36px);
+            margin-bottom: 40px;
             font-weight: 300;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            text-align: center;
         }
 
-        .calendar-info p {
-            color: var(--cream);
-            line-height: 1.8;
-            font-size: 16px;
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
         }
 
-        .calendar-embed {
-            background: rgba(212,175,55,0.02);
-            border-radius: 0;
-            padding: 15px;
-            border: 1px solid rgba(212,175,55,0.2);
+        .event-card {
+            background: rgba(212,175,55,0.03);
+            border: 1px solid rgba(212,175,55,0.15);
             border-top: 2px solid var(--gold);
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
         }
 
-        .calendar-embed iframe {
+        .event-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 600px;
-            border: none;
-            border-radius: 10px;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,193,37,0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            border-top-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(255,193,37,0.15);
+        }
+
+        .event-card:hover::before {
+            opacity: 1;
+        }
+
+        .event-card.happening-now {
+            border-color: var(--gold);
+            background: rgba(255,193,37,0.08);
+        }
+
+        .event-date {
+            color: var(--gold);
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .event-title {
+            color: var(--cream);
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        .event-time {
+            color: var(--silver);
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .event-status {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255,193,37,0.1);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .event-status.live {
+            background: rgba(255,193,37,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255,193,37,0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(255,193,37,0);
+            }
+        }
+
+        .loading-events {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--silver);
+            font-size: 18px;
+        }
+
+        .no-events {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--silver);
+        }
+
+        .no-events h3 {
+            color: var(--gold);
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        /* Event Filters */
+        .event-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 30px;
+            background: rgba(212,175,55,0.05);
+            border: 1px solid rgba(212,175,55,0.3);
+            color: var(--silver);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn:hover {
+            background: rgba(212,175,55,0.1);
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .filter-btn.active {
+            background: rgba(255,193,37,0.15);
+            color: var(--gold);
+            border-color: var(--gold);
+            border-width: 2px;
         }
 
         /* Footer */
@@ -389,24 +560,39 @@
         <p>Alle kommenden Konzerte und Jam Sessions im Premium Jazz Club</p>
     </section>
 
+    <!-- Background Clocks -->
+    <div class="background-clocks">
+        <!-- Clock 1 -->
+        <div class="swiss-clock" style="top: 10%; left: 5%;">
+            <div class="clock-face"></div>
+        </div>
+        <!-- Clock 2 -->
+        <div class="swiss-clock inverted" style="top: 60%; right: 8%;">
+            <div class="clock-face"></div>
+        </div>
+        <!-- Clock 3 -->
+        <div class="swiss-clock" style="bottom: 15%; left: 10%;">
+            <div class="clock-face"></div>
+        </div>
+    </div>
+
     <!-- Calendar Section -->
     <section class="calendar-section">
         <div class="calendar-container">
-            <div class="calendar-info">
-                <h2>🎵 Unser Event-Kalender</h2>
-                <p>
-                    Hier finden Sie alle öffentlichen Events des Premium Jazz Club Basel.
-                    Von Live-Konzerten bis zu unseren legendären Freitags-Jam-Sessions -
-                    verpassen Sie kein musikalisches Highlight!
-                </p>
-            </div>
+            <!-- Upcoming Events -->
+            <div class="upcoming-events">
+                <h2>🎵 Kommende Events</h2>
 
-            <div class="calendar-embed">
-                <iframe
-                    src="https://calendar.google.com/calendar/embed?src=eul03m507dtgk7l8pqrp6eli88%40group.calendar.google.com&ctz=Europe%2FZurich&mode=AGENDA&showTitle=0&showNav=1&showDate=1&showPrint=0&showTabs=1&showCalendars=0&showTz=0"
-                    frameborder="0"
-                    scrolling="no">
-                </iframe>
+                <!-- Event Filters -->
+                <div class="event-filters">
+                    <button class="filter-btn active" onclick="filterEvents('all')">Alle</button>
+                    <button class="filter-btn" onclick="filterEvents('jam')">Jam Sessions</button>
+                    <button class="filter-btn" onclick="filterEvents('concert')">Konzerte</button>
+                </div>
+
+                <div id="eventsGrid" class="events-grid">
+                    <div class="loading-events">Lade Events...</div>
+                </div>
             </div>
         </div>
     </section>
@@ -443,6 +629,137 @@
             if (!navContainer.contains(e.target) && mobileMenu.classList.contains('active')) {
                 closeMobileMenu();
             }
+        });
+
+        // ========== Calendar API Integration ==========
+        const EventsAPI = {
+            API_KEY: 'AIzaSyDMx5bTdCCJK2bRSaTWON7BRiOklc8z8so',
+            CALENDAR_ID: 'eul03m507dtgk7l8pqrp6eli88@group.calendar.google.com',
+            allEvents: [],
+            currentFilter: 'all',
+
+            async fetchEvents() {
+                const yesterday = new Date();
+                yesterday.setHours(yesterday.getHours() - 24);
+                const timeMin = yesterday.toISOString();
+
+                const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(this.CALENDAR_ID)}/events?` +
+                    `key=${this.API_KEY}` +
+                    `&timeMin=${timeMin}` +
+                    `&maxResults=20` +
+                    `&singleEvents=true` +
+                    `&orderBy=startTime`;
+
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error('API Error');
+                    const data = await response.json();
+                    this.allEvents = data.items || [];
+                    this.renderEvents();
+                } catch (error) {
+                    console.error('Calendar API error:', error);
+                    this.showError();
+                }
+            },
+
+            getEventType(title) {
+                const lower = title.toLowerCase();
+                if (lower.includes('jam session') || lower.includes('jam-session')) {
+                    return 'jam';
+                } else if (lower.includes('konzert') || lower.includes('concert') || lower.includes('live')) {
+                    return 'concert';
+                }
+                return 'other';
+            },
+
+            renderEvents() {
+                const grid = document.getElementById('eventsGrid');
+                const now = new Date();
+
+                // Filter events that haven't ended yet and are either jam or concert
+                let upcomingEvents = this.allEvents.filter(event => {
+                    const end = new Date(event.end.dateTime || event.end.date);
+                    const type = this.getEventType(event.summary);
+                    return end > now && (type === 'jam' || type === 'concert');
+                });
+
+                // Apply current filter
+                if (this.currentFilter !== 'all') {
+                    upcomingEvents = upcomingEvents.filter(event =>
+                        this.getEventType(event.summary) === this.currentFilter
+                    );
+                }
+
+                if (upcomingEvents.length === 0) {
+                    grid.innerHTML = `
+                        <div class="no-events">
+                            <h3>Keine Events geplant</h3>
+                            <p>Zurzeit sind keine Events in dieser Kategorie geplant.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grid.innerHTML = upcomingEvents.map(event => {
+                    const start = new Date(event.start.dateTime || event.start.date);
+                    const end = new Date(event.end.dateTime || event.end.date);
+                    const isHappeningNow = now >= start && now <= end;
+                    const type = this.getEventType(event.summary);
+
+                    const dateStr = start.toLocaleDateString('de-CH', {
+                        weekday: 'long',
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric'
+                    });
+
+                    const timeStr = `${start.toLocaleTimeString('de-CH', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    })} - ${end.toLocaleTimeString('de-CH', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    })}`;
+
+                    const typeLabel = type === 'jam' ? '🎵 Jam Session' : type === 'concert' ? '🎸 Konzert' : '🎶 Event';
+
+                    return `
+                        <div class="event-card ${isHappeningNow ? 'happening-now' : ''}" data-type="${type}">
+                            <div class="event-date">${dateStr}</div>
+                            <div class="event-title">${event.summary}</div>
+                            <div class="event-time">${timeStr}</div>
+                            <div style="color: var(--silver); font-size: 14px; margin-top: 10px;">${typeLabel}</div>
+                            ${isHappeningNow ? '<div class="event-status live">🎵 Läuft gerade!</div>' : ''}
+                        </div>
+                    `;
+                }).join('');
+            },
+
+            showError() {
+                document.getElementById('eventsGrid').innerHTML = `
+                    <div class="no-events">
+                        <h3>Fehler beim Laden</h3>
+                        <p>Events konnten nicht geladen werden. Bitte versuchen Sie es später erneut.</p>
+                    </div>
+                `;
+            }
+        };
+
+        // Filter function
+        function filterEvents(filter) {
+            EventsAPI.currentFilter = filter;
+            EventsAPI.renderEvents();
+
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Load events on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            EventsAPI.fetchEvents();
         });
     </script>
 </body>
