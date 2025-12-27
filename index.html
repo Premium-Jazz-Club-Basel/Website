@@ -2034,6 +2034,26 @@
             CalendarAPI.fetchAndUpdate();
         }
 
+        // Debug function - call debugCalendar() in console to see events
+        window.debugCalendar = function() {
+            const events = CalendarAPI.getCachedEvents();
+            console.log('=== CALENDAR DEBUG ===');
+            console.log('Total events:', events.length);
+            events.forEach((event, i) => {
+                const start = new Date(event.start.dateTime || event.start.date);
+                const end = new Date(event.end.dateTime || event.end.date);
+                const now = new Date();
+                const isNow = now >= start && now <= end;
+                console.log(`Event ${i+1}: "${event.summary}"`);
+                console.log(`  Start: ${start.toLocaleString('de-CH')}`);
+                console.log(`  End: ${end.toLocaleString('de-CH')}`);
+                console.log(`  Is happening now: ${isNow}`);
+                console.log(`  Status would be: ${CalendarAPI.parseEventForStatus(event)}`);
+            });
+            console.log('Current Status:', CalendarAPI.getCurrentStatus());
+            console.log('Next Event:', CalendarAPI.getNextEvent()?.summary || 'None');
+        };
+
         // Start calendar integration when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => CalendarAPI.startAutoRefresh());
