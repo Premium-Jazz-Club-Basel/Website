@@ -1829,11 +1829,15 @@
 
             // Fetch events from Google Calendar API
             async fetchEvents() {
-                const now = new Date().toISOString();
+                // Start search from 24 hours ago to catch events that are currently running
+                const yesterday = new Date();
+                yesterday.setHours(yesterday.getHours() - 24);
+                const timeMin = yesterday.toISOString();
+
                 const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(this.CALENDAR_ID)}/events?` +
                     `key=${this.API_KEY}` +
-                    `&timeMin=${now}` +
-                    `&maxResults=10` +
+                    `&timeMin=${timeMin}` +
+                    `&maxResults=20` +
                     `&singleEvents=true` +
                     `&orderBy=startTime`;
 
@@ -1931,15 +1935,26 @@
                 };
             },
 
-            // Get next upcoming event
+            // Get next upcoming event (or current event if one is running)
             getNextEvent() {
                 const events = this.getCachedEvents();
                 const now = new Date();
 
-                // Find next future event
-                const nextEvent = events.find(event => {
+                // First, check if there's a current event
+                const currentEvent = events.find(event => {
                     const start = new Date(event.start.dateTime || event.start.date);
-                    return start > now;
+                    const end = new Date(event.end.dateTime || event.end.date);
+                    return now >= start && now <= end;
+                });
+
+                if (currentEvent) {
+                    return currentEvent;
+                }
+
+                // Otherwise, find next future event that hasn't ended yet
+                const nextEvent = events.find(event => {
+                    const end = new Date(event.end.dateTime || event.end.date);
+                    return end > now;
                 });
 
                 return nextEvent || null;
@@ -1955,6 +1970,8 @@
                 if (nextEvent) {
                     const start = new Date(nextEvent.start.dateTime || nextEvent.start.date);
                     const end = new Date(nextEvent.end.dateTime || nextEvent.end.date);
+                    const now = new Date();
+                    const isHappeningNow = now >= start && now <= end;
 
                     const dateStr = start.toLocaleDateString('de-CH', {
                         weekday: 'short',
@@ -1963,10 +1980,14 @@
                     });
                     const timeStr = `${start.toLocaleTimeString('de-CH', { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString('de-CH', { hour: '2-digit', minute: '2-digit' })}`;
 
+                    const label = isHappeningNow
+                        ? '<span style="color: var(--gold); font-size: 14px;">🎵 Läuft gerade!</span>'
+                        : '<span style="color: var(--silver); font-size: 14px;">Nächstes Event</span>';
+
                     hoursContent.innerHTML = `
                         <strong style="color: var(--gold);">${nextEvent.summary}</strong><br>
                         ${dateStr}: ${timeStr}<br>
-                        <span style="color: var(--silver); font-size: 14px;">Nächstes Event</span>
+                        ${label}
                     `;
                 } else {
                     hoursContent.innerHTML = `
