@@ -7,7 +7,10 @@
       "Bash(git commit:*)",
       "Bash(git commit -m \"$\\(cat <<''EOF''\nAlign clock marker tips at uniform edge circle\n\nFixed uneven marker appearance by adjusting translate distance per marker type.\nSince markers have different heights, they need different translate values to \nalign their tips \\(outer ends\\) at the same circle:\n\n- Main markers \\(10% height\\): -400% translate\n- Hour markers \\(8% height\\): -475% translate  \n- Minute markers \\(6% height\\): -567% translate\n\nThis ensures all marker tips touch the same circular edge, creating a clean,\nprofessional Swiss Railway clock appearance.\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(python3:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(ls:*)",
+      "Bash(identify:*)",
+      "Bash(cat:*)"
     ]
   }
 }
