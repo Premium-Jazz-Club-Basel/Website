@@ -848,14 +848,13 @@
             currentFilter: 'all',
 
             async fetchEvents() {
-                const yesterday = new Date();
-                yesterday.setHours(yesterday.getHours() - 24);
-                const timeMin = yesterday.toISOString();
+                const now = new Date();
+                const timeMin = now.toISOString();
 
                 const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(this.CALENDAR_ID)}/events?` +
                     `key=${this.API_KEY}` +
                     `&timeMin=${timeMin}` +
-                    `&maxResults=20` +
+                    `&maxResults=100` +
                     `&singleEvents=true` +
                     `&orderBy=startTime`;
 
