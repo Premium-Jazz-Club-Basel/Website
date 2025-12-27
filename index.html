@@ -806,7 +806,7 @@
             align-items: center;
             gap: 12px;
             padding: 15px 35px;
-            background: rgba(212,175,55,0.05);
+            background: radial-gradient(ellipse at center, #1a1a1a 0%, var(--black) 100%);
             border-radius: 0;
             margin-top: 30px;
             border: 1px solid rgba(192,192,192,0.2);
@@ -815,11 +815,29 @@
             cursor: pointer;
             position: relative;
             z-index: 10;
+            overflow: hidden;
+        }
+
+        .status-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 15% 50%, rgba(212,175,55,0.08), transparent 60%),
+                radial-gradient(circle at 85% 50%, rgba(192,192,192,0.05), transparent 60%);
+            opacity: 0.6;
+            z-index: -1;
         }
 
         .status-badge:hover {
-            background: rgba(212,175,55,0.08);
             border-left-color: var(--gold);
+        }
+
+        .status-badge:hover::before {
+            opacity: 0.9;
         }
 
         .status-indicator {
@@ -1803,8 +1821,20 @@
 
         // Load Status from LocalStorage on Page Load
         function loadClubStatus() {
+            // Check if manual override is active
+            const isCalendarControlled = localStorage.getItem('calendarControlled') !== 'false';
+
+            if (isCalendarControlled) {
+                // Let the Calendar API control the status
+                console.log('Calendar-controlled mode - waiting for Calendar API to set status');
+                return;
+            }
+
+            // Manual override mode - load from localStorage
             const savedStatus = localStorage.getItem('clubStatus') || 'closed';
             setClubStatus(savedStatus);
+            window.manualOverride = true;
+            console.log('Manual override mode active - using saved status:', savedStatus);
         }
 
         // Initialize status on page load
