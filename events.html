@@ -704,6 +704,9 @@
                     );
                 }
 
+                // Limit to 6 events maximum for clean 3-column grid (shows 3 or 6 cards)
+                upcomingEvents = upcomingEvents.slice(0, 6);
+
                 if (upcomingEvents.length === 0) {
                     grid.innerHTML = `
                         <div class="no-events">
