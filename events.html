@@ -322,9 +322,15 @@
 
         .events-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             margin-bottom: 40px;
+        }
+
+        @media (max-width: 1024px) {
+            .events-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .event-card {
@@ -502,6 +508,10 @@
                 padding-top: 120px;
             }
 
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+
             .calendar-embed iframe {
                 height: 500px;
             }
@@ -518,6 +528,10 @@
 
             .calendar-embed iframe {
                 height: 450px;
+            }
+
+            .event-card {
+                padding: 20px;
             }
         }
     </style>
