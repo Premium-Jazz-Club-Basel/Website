@@ -1557,9 +1557,9 @@
 
                 <div class="contact-item">
                     <h3>🕐 Öffnungszeiten</h3>
-                    <p>Mi-Sa: 19:00 - 02:00<br>
-                    Jam Session: Fr ab 22:00<br>
-                    <span style="color: var(--gold);">Walk-in!</span></p>
+                    <p id="openingHoursContent">
+                        <span style="color: var(--silver);">Kalender wird geladen...</span>
+                    </p>
 
                     <!-- Club Status -->
                     <div class="status-badge-small" id="contactStatusBadge" style="margin-top: 15px;">
@@ -1591,8 +1591,11 @@
     <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel">
         <h3>Club Status</h3>
-        <button onclick="setClubStatus('open')" id="btnOpen">🟢 Club geöffnet</button>
-        <button onclick="setClubStatus('closed')" id="btnClosed" class="active">⚫ Club geschlossen</button>
+        <button onclick="window.manualOverride=true; setClubStatus('open')" id="btnOpen">🟢 Club geöffnet</button>
+        <button onclick="window.manualOverride=true; setClubStatus('closed')" id="btnClosed" class="active">⚫ Club geschlossen</button>
+        <hr style="margin: 15px 0; border: none; border-top: 1px solid rgba(192,192,192,0.2);">
+        <button onclick="enableManualOverride()" style="background: rgba(255,193,37,0.1);">🔓 Manuelle Kontrolle</button>
+        <button onclick="disableManualOverride()" style="background: rgba(192,192,192,0.1);">🔄 Kalender-Kontrolle</button>
     </div>
 
     <script>
@@ -1816,6 +1819,227 @@
                 adminPanel.classList.remove('active');
             }
         });
+
+        // ========== Google Calendar Integration ==========
+        const CalendarAPI = {
+            API_KEY: 'AIzaSyDMx5bTdCCJK2bRSaTWON7BRiOklc8z8so',
+            CALENDAR_ID: 'eul03m507dtgk7l8pqrp6eli88@group.calendar.google.com',
+            CACHE_DURATION: 5 * 60 * 1000, // 5 minutes
+            CACHE_MAX_AGE: 60 * 60 * 1000, // 1 hour
+
+            // Fetch events from Google Calendar API
+            async fetchEvents() {
+                const now = new Date().toISOString();
+                const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(this.CALENDAR_ID)}/events?` +
+                    `key=${this.API_KEY}` +
+                    `&timeMin=${now}` +
+                    `&maxResults=10` +
+                    `&singleEvents=true` +
+                    `&orderBy=startTime`;
+
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.status}`);
+                    }
+                    const data = await response.json();
+
+                    // Cache result
+                    localStorage.setItem('calendarCache', JSON.stringify({
+                        timestamp: Date.now(),
+                        events: data.items || []
+                    }));
+
+                    console.log('Calendar events fetched:', data.items?.length || 0);
+                    return data.items || [];
+                } catch (error) {
+                    console.error('Calendar API error:', error);
+                    // Return cached data if available
+                    return this.getCachedEvents();
+                }
+            },
+
+            // Get cached events from localStorage
+            getCachedEvents() {
+                try {
+                    const cached = localStorage.getItem('calendarCache');
+                    if (!cached) return [];
+
+                    const { timestamp, events } = JSON.parse(cached);
+
+                    // Cache valid for 1 hour
+                    if (Date.now() - timestamp < this.CACHE_MAX_AGE) {
+                        console.log('Using cached calendar data');
+                        return events;
+                    }
+                } catch (error) {
+                    console.error('Cache error:', error);
+                }
+
+                return [];
+            },
+
+            // Parse event title to determine if it means "open" or "closed"
+            parseEventForStatus(event) {
+                const title = event.summary.toLowerCase();
+
+                // Keywords that indicate "closed" status (higher priority)
+                const closedKeywords = ['geschlossen', 'closed', 'private', 'privat'];
+
+                // Keywords that indicate "open" status
+                const openKeywords = ['jam session', 'konzert', 'concert', 'live', 'open', 'geöffnet'];
+
+                // Check for closed keywords first (higher priority)
+                if (closedKeywords.some(keyword => title.includes(keyword))) {
+                    return 'closed';
+                }
+
+                // Check for open keywords
+                if (openKeywords.some(keyword => title.includes(keyword))) {
+                    return 'open';
+                }
+
+                // Default: if event exists and no closed keyword, assume open
+                return 'open';
+            },
+
+            // Get current status based on events happening now
+            getCurrentStatus() {
+                const events = this.getCachedEvents();
+                const now = new Date();
+
+                // Find events happening now
+                const currentEvent = events.find(event => {
+                    const start = new Date(event.start.dateTime || event.start.date);
+                    const end = new Date(event.end.dateTime || event.end.date);
+                    return now >= start && now <= end;
+                });
+
+                if (currentEvent) {
+                    return {
+                        status: this.parseEventForStatus(currentEvent),
+                        event: currentEvent,
+                        reason: 'current_event'
+                    };
+                }
+
+                // No current event = closed
+                return {
+                    status: 'closed',
+                    event: null,
+                    reason: 'no_current_event'
+                };
+            },
+
+            // Get next upcoming event
+            getNextEvent() {
+                const events = this.getCachedEvents();
+                const now = new Date();
+
+                // Find next future event
+                const nextEvent = events.find(event => {
+                    const start = new Date(event.start.dateTime || event.start.date);
+                    return start > now;
+                });
+
+                return nextEvent || null;
+            },
+
+            // Update opening hours section in UI
+            updateOpeningHours() {
+                const nextEvent = this.getNextEvent();
+                const hoursContent = document.getElementById('openingHoursContent');
+
+                if (!hoursContent) return;
+
+                if (nextEvent) {
+                    const start = new Date(nextEvent.start.dateTime || nextEvent.start.date);
+                    const end = new Date(nextEvent.end.dateTime || nextEvent.end.date);
+
+                    const dateStr = start.toLocaleDateString('de-CH', {
+                        weekday: 'short',
+                        day: '2-digit',
+                        month: '2-digit'
+                    });
+                    const timeStr = `${start.toLocaleTimeString('de-CH', { hour: '2-digit', minute: '2-digit' })} - ${end.toLocaleTimeString('de-CH', { hour: '2-digit', minute: '2-digit' })}`;
+
+                    hoursContent.innerHTML = `
+                        <strong style="color: var(--gold);">${nextEvent.summary}</strong><br>
+                        ${dateStr}: ${timeStr}<br>
+                        <span style="color: var(--silver); font-size: 14px;">Nächstes Event</span>
+                    `;
+                } else {
+                    hoursContent.innerHTML = `
+                        Geschlossen<br>
+                        <span style="color: var(--silver); font-size: 14px;">Keine Events geplant</span>
+                    `;
+                }
+            },
+
+            // Update status badges
+            updateStatusBadges() {
+                const { status, event } = this.getCurrentStatus();
+
+                // Only update if not in manual override mode
+                if (window.manualOverride) {
+                    console.log('Manual override active, skipping status update');
+                    return;
+                }
+
+                // Mark as calendar controlled
+                localStorage.setItem('calendarControlled', 'true');
+
+                // Use existing setClubStatus function
+                setClubStatus(status);
+
+                console.log(`Status updated to: ${status}`, event ? `(${event.summary})` : '(no current event)');
+            },
+
+            // Fetch and update everything
+            async fetchAndUpdate() {
+                console.log('Fetching calendar data...');
+                await this.fetchEvents();
+                this.updateStatusBadges();
+                this.updateOpeningHours();
+            },
+
+            // Start auto-refresh mechanism
+            startAutoRefresh() {
+                // Initial load
+                this.fetchAndUpdate();
+
+                // Refresh every 5 minutes
+                setInterval(() => this.fetchAndUpdate(), this.CACHE_DURATION);
+
+                // Also refresh when page becomes visible
+                document.addEventListener('visibilitychange', () => {
+                    if (!document.hidden) {
+                        console.log('Page visible, refreshing calendar...');
+                        this.fetchAndUpdate();
+                    }
+                });
+            }
+        };
+
+        // Manual override function
+        function enableManualOverride() {
+            window.manualOverride = true;
+            localStorage.setItem('calendarControlled', 'false');
+            alert('Manuelle Kontrolle aktiviert. Status wird nicht automatisch aktualisiert.');
+        }
+
+        function disableManualOverride() {
+            window.manualOverride = false;
+            alert('Kalender-Kontrolle wieder aktiviert.');
+            CalendarAPI.fetchAndUpdate();
+        }
+
+        // Start calendar integration when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => CalendarAPI.startAutoRefresh());
+        } else {
+            CalendarAPI.startAutoRefresh();
+        }
     </script>
 </body>
 </html>
