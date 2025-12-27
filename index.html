@@ -1622,12 +1622,22 @@
             },
 
             // Get next upcoming event (or current event if one is running)
+            // Only show Jam Session, Konzert, and Party events
             getNextEvent() {
                 const events = this.getCachedEvents();
                 const now = new Date();
 
-                // First, check if there's a current event
-                const currentEvent = events.find(event => {
+                // Filter for relevant events only
+                const relevantEvents = events.filter(event => {
+                    const title = event.summary.toLowerCase();
+                    return title.includes('jam session') ||
+                           title.includes('konzert') ||
+                           title.includes('concert') ||
+                           title.includes('party');
+                });
+
+                // First, check if there's a current relevant event
+                const currentEvent = relevantEvents.find(event => {
                     const start = new Date(event.start.dateTime || event.start.date);
                     const end = new Date(event.end.dateTime || event.end.date);
                     return now >= start && now <= end;
@@ -1637,8 +1647,8 @@
                     return currentEvent;
                 }
 
-                // Otherwise, find next future event that hasn't ended yet
-                const nextEvent = events.find(event => {
+                // Otherwise, find next future relevant event that hasn't ended yet
+                const nextEvent = relevantEvents.find(event => {
                     const end = new Date(event.end.dateTime || event.end.date);
                     return end > now;
                 });
