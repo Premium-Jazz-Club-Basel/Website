@@ -218,7 +218,9 @@
         /* Hero Section - Elegant & Minimalist */
         .hero {
             height: 100vh;
-            background: radial-gradient(ellipse at center, #1a1a1a 0%, var(--black) 100%);
+            background:
+                linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.7)),
+                url('hero-artwork.jpg') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -661,17 +663,44 @@
 
         .contact-item {
             padding: 35px;
-            background: rgba(212,175,55,0.03);
+            background:
+                linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.85)),
+                url('hero-artwork.jpg') center/cover;
             border-radius: 0;
             border: 1px solid rgba(212,175,55,0.15);
             border-top: 2px solid var(--silver);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(212,175,55,0.08), transparent 50%),
+                radial-gradient(circle at 85% 80%, rgba(192,192,192,0.05), transparent 50%);
+            opacity: 0.6;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .contact-item > * {
+            position: relative;
+            z-index: 1;
         }
 
         .contact-item:hover {
-            background: rgba(212,175,55,0.06);
             border-top-color: var(--gold);
             transform: translateY(-5px);
+        }
+
+        .contact-item:hover::before {
+            opacity: 0.9;
         }
 
         .contact-item h3 {
