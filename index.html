@@ -579,7 +579,9 @@
         }
 
         .service-card {
-            background: rgba(212,175,55,0.02);
+            background:
+                linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.85)),
+                url('hero-artwork.jpg') center/cover;
             padding: 45px;
             border-radius: 0;
             border: 1px solid rgba(212,175,55,0.15);
@@ -594,19 +596,38 @@
             position: absolute;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(212,175,55,0.08), transparent 50%),
+                radial-gradient(circle at 85% 80%, rgba(192,192,192,0.05), transparent 50%);
+            opacity: 0.6;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .service-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 2px;
             height: 0;
             background: var(--gold);
             transition: height 0.3s ease;
+            z-index: 1;
         }
 
         .service-card:hover {
-            background: rgba(212,175,55,0.05);
             transform: translateY(-8px);
             box-shadow: 0 10px 30px rgba(212,175,55,0.15);
         }
 
         .service-card:hover::before {
+            opacity: 0.9;
+        }
+
+        .service-card:hover::after {
             height: 100%;
         }
 
@@ -615,6 +636,8 @@
             color: var(--gold);
             margin-bottom: 25px;
             text-shadow: 0 0 20px rgba(212,175,55,0.5);
+            position: relative;
+            z-index: 2;
         }
 
         .service-card h3 {
@@ -622,14 +645,14 @@
             color: var(--gold);
             margin-bottom: 20px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .service-card p {
             color: var(--cream);
             line-height: 1.9;
             position: relative;
-            z-index: 1;
+            z-index: 2;
             font-size: 16px;
         }
 
